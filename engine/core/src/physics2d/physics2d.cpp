@@ -247,7 +247,10 @@ BodyId World::raycast(math::Vec2 from,math::Vec2 to,bool sensors) const {
         for(int axis=0;axis<2;++axis){
             if(std::fabs(d[axis])<kEpsilon){if(from[axis]<a.min[axis]||from[axis]>a.max[axis]){t0=2;break;}}
             else{f32 inv=1/d[axis],lo=(a.min[axis]-from[axis])*inv,hi=(a.max[axis]-from[axis])*inv;
-                if(lo>hi)std::swap(lo,hi);t0=std::max(t0,lo);t1=std::min(t1,hi);}
+                if(lo>hi)std::swap(lo,hi);
+                t0=std::max(t0,lo);
+                t1=std::min(t1,hi);
+            }
         }
         if(t0<=t1&&t0<best){best=t0;found=bp->id;}
     }

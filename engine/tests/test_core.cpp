@@ -30,6 +30,10 @@ PRISM_TEST(core_ecs_generation) {
     auto recycled=w.create(); PRISM_CHECK_EQ(recycled.index,e.index);
     PRISM_CHECK(recycled.generation!=e.generation);
     PRISM_CHECK(w.transform(recycled).position==math::Vec3(0,0,0));
+    PRISM_CHECK_EQ(w.each<Health>([](EntityId,Transform&,Health&){}),std::size_t(0));
+    auto new_world=World{};
+    new_world.create();
+    PRISM_CHECK_EQ(new_world.each<Health>([](EntityId,Transform&,Health&){}),std::size_t(0));
 }
 PRISM_TEST(core_jobs_parallel) {
     JobSystem jobs(2);std::atomic<int> sum{0};
@@ -56,7 +60,6 @@ PRISM_TEST(core_physics_fall_and_contact) {
     physics2d::Body p;p.position={0,0};box.half_extents={0.5f,0.5f};p.shapes.push_back(box);
     auto player=world.create_body(p);
     for(int i=0;i<180;++i)world.step(1.0f/60);
-    std::printf("physics pos=%f vel=%f contacts=%zu\n",world.body(player)->position.y,world.body(player)->linear_velocity.y,world.contacts().size());
     PRISM_CHECK(world.body(player)->position.y<0);
     PRISM_CHECK(world.body(player)->position.y>-2.1f);
     PRISM_CHECK_EQ(world.stats().bodies,2);

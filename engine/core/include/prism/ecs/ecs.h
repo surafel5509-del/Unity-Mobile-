@@ -142,6 +142,7 @@ public:
     void destroy(EntityId e) {
         if (!alive(e)) return;
         for (auto& kv : pools_) kv.second->remove(e.index);
+        tags_.remove(e.index);
         transforms_.remove(e.index);
         ++generations_[e.index];
         free_.push_back(e.index);
@@ -244,7 +245,7 @@ private:
     std::size_t each_impl(Fn&& fn, std::index_sequence<Is...>) {
         using First = std::tuple_element_t<0, Tuple>;
         ComponentPool<First>* first = pool<First>();
-        if (!first) return 0;
+        if (!first || !((pool<std::tuple_element_t<Is, Tuple>>() != nullptr) && ...)) return 0;
         std::size_t count = 0;
         // copy entity list: fn() may add/remove components
         std::vector<std::size_t> ids = first->entities();

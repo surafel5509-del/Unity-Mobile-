@@ -160,7 +160,9 @@ void InputMap::end_frame() {
 
 VirtualControl& InputMap::control(const std::string& name) {
     for (auto& c : controls_) if (c.name == name) return c;
-    controls_.push_back(VirtualControl{name});
+    VirtualControl c;
+    c.name = name;
+    controls_.push_back(std::move(c));
     return controls_.back();
 }
 
