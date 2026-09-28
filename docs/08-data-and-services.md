@@ -1,6 +1,11 @@
 # 8. Assets, save games, offline IAP, audio, AI and LAN — design contracts
 
-These are architecture contracts, **not shipped runtime systems**. See [status matrix](01-architecture.md#implemented-module-by-module).
+Mixed status. The **asset container, audio engine, game AI and LAN networking
+are shipped and host-tested** — see the per-file test inventory in
+[09-testing](09-testing.md#implemented-host-checks). The remaining sections
+below (3D importers, encrypted saves, offline IAP, Android device services) are
+architecture contracts, **not shipped runtime systems**. See the
+[status matrix](01-architecture.md#implemented-module-by-module).
 
 ## Asset import (target)
 
@@ -36,3 +41,28 @@ Android permission-gated multicast discovery → local UDP transport → reliabl
 ## Other target services
 
 Audio mixer, notifications, haptics, Camera2/CameraX, GPS, NFC, biometrics, share sheet, XR/AR, accessibility, localization and plugin sandbox require separate Android permission/capability adapters. None are included in the current demo; no placeholder Java APIs misrepresent coverage.
+
+## LAN multiplayer and the INTERNET permission
+
+`prism/net` is implemented and host-tested, including a real UDP round trip on
+the loopback interface. On Android every socket — including one that only ever
+talks to another device on the same Wi-Fi network — requires
+`android.permission.INTERNET`. That permission grants socket capability; it does
+not by itself mean the app reaches the internet, and PRISM has no code path that
+resolves a public hostname.
+
+The shipped manifest requests **no permissions at all**, so `UdpTransport::open`
+returns false on device and the network layer stays inert. That is deliberate:
+the default APK must be installable and runnable with zero permission grants.
+
+To enable LAN play in a specific game, add one line to that game's manifest:
+
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+```
+
+Nothing else changes. `Session`, `ReliableChannel`, `Rollback`,
+`LagCompensation` and `SnapshotStream` are transport-agnostic; swap
+`LoopbackTransport` for `UdpTransport` and the same code runs. Discovery uses
+`255.255.255.255` broadcasts only, so no router configuration or cloud
+rendezvous service is involved.

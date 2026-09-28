@@ -2,7 +2,7 @@
 
 **Every Angle. Every World. One File.** · Android APK only · MIT · offline-first
 
-> **Status: early engine foundation, not a finished Unity-equivalent.** This repository was started from an empty README. The C++ core, PrismScript interpreter, Android demo, touch input, 2D physics, and host tests are implemented. Production Vulkan/3D physics/editor/asset pipeline/AI/LAN/ML/AR/monetization are *planned*, not present. See [feature status](docs/01-architecture.md#implementation-status).
+> **Status: early engine foundation, not a finished Unity-equivalent.** This repository was started from an empty README. The C++20 core, PrismScript interpreter, math/ECS/jobs, crypto, JSON, render-pipeline planning, audio mixer, game AI, LAN networking with rollback, the `.prism` asset container, the runtime UI layer, 2D physics, the Android demo and 148 host tests are implemented. **Not present:** a Vulkan or GLES backend that executes the render graph, 3D physics, animation, particles, terrain, the graphical editor, ML, AR and monetization. See [feature status](docs/01-architecture.md#implemented-module-by-module).
 
 ![PRISM logo](brand/logo/prism-logo.svg)
 
@@ -28,8 +28,8 @@ The GitHub Actions [Android APK](.github/workflows/android-apk.yml) workflow ins
 
 | Directory | Purpose |
 |---|---|
-| `engine/core` | Native C++20 runtime: math, ECS, events, jobs, script VM, input, 2D physics |
-| `engine/tests` | Zero-dependency host unit tests |
+| `engine/core` | Native C++20 runtime (~13,400 lines): core, math, ECS, jobs, input, script VM, crypto, JSON, render planning, audio, AI, networking, assets, UI, 2D physics, Android GPU profiling |
+| `engine/tests` | Zero-dependency host unit tests (148 tests, 5,699 assertions) |
 | `android` | One Android application; JNI + GLES 3 renderer; emits an installable APK |
 | `editor/src/PrismEditor` | .NET 8 **CLI starter** for project creation/inspection (not a scene IDE or working custom export) |
 | `samples` | Scene/template descriptions for future importer |

@@ -2,7 +2,36 @@
 
 ## Implemented host checks
 
-`./build_tests.sh` compiles all C++ runtime sources and tests with C++20, threads and `-Wall -Wextra`. Current tests cover math, palette, memory allocators, ECS generations, typed bus, jobs, gestures, 2D falling/raycast, deterministic RNG, PrismScript functions/classes/collections, interpreter error reports, and the exact bundled script. Tests must pass before Android CI builds.
+`./build_tests.sh` compiles every C++ runtime source and test with C++20,
+`-Wall -Wextra` and threads, then runs `build-host/prism_tests`. Passing an
+argument filters by substring (`./build_tests.sh net_`). The suite is
+**148 tests / 5,699 assertions / 0 failures** and must pass before Android CI
+builds.
+
+| File | Tests | What it pins down |
+|---|---|---|
+| `test_core.cpp` | 6 | engine lifecycle, fixed-step clock, pools, log ring, typed bus, registry |
+| `test_math.cpp` | 9 | vectors, Mat4, Quat, transforms, brand palette |
+| `test_script.cpp` | 6 | PrismScript functions, closures, classes, collections, error reports, the bundled `sample.prism` |
+| `test_crypto.cpp` | 9 | SHA-256, HMAC-SHA256, ChaCha20 and Poly1305 against RFC 8439 vectors, CRC-32, unlock codes, plus a 500-case AEAD fuzz |
+| `test_json.cpp` | 7 | parser/serializer round trips, escapes, surrogate pairs, error reporting |
+| `test_render.cpp` | 15 | GPU-profile detection and quality tiers, spectral dispersion, tonemapping, frame-graph ordering, light grid, LOD, adaptive resolution |
+| `test_audio.cpp` | 12 | WAV round trip, envelopes, mixer voices and stealing, bus gain, attenuation, Doppler, panning, reverb tail, synth |
+| `test_ai.cpp` | 17 | A*, navmesh funnel, flow fields, behaviour trees, state machines, GOAP, utility curves, steering, formations, crowd separation |
+| `test_net.cpp` | 28 | bit packing, packet codec, ack bitmask, retransmission, RFC 6298 RTT, discovery, sessions, rollback resimulation, lag compensation, snapshot interpolation, a real UDP loopback round trip |
+| `test_assets.cpp` | 21 | `.prism` container round trip and tamper detection, dependency graph and build order, atlas packing, mesh primitives and winding, ETC1/ETC2 known-answer vectors, mip chains |
+| `test_ui.cpp` | 18 | flexbox layout and grow shares, alignment, hit testing, button/slider/toggle interaction, draw-command ordering, 7-language localisation, touch bindings |
+
+Coverage is behavioural rather than line-based: each subsystem has at least one
+test that would fail if the algorithm regressed, and several were written to
+catch bugs the implementation actually had (unclamped audio attenuation, an
+out-of-bounds reverb write, a Mali tier threshold, a frame-graph false cycle, a
+mip chain that read a moved-from buffer, an inside-out sphere winding, a
+double-fired UI tap).
+
+Known gaps: no GPU-side tests (nothing submits Vulkan or GLES work), no
+on-device automation, no performance regression gate, and no coverage of
+subsystems that do not exist yet (3D physics, animation, particles, terrain).
 
 ## APK CI
 

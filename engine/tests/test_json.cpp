@@ -54,13 +54,13 @@ PRISM_TEST(json_error_reporting) {
     PRISM_CHECK(Value::parse("{", &err).is_null());
     PRISM_CHECK(!err.empty());
     err.clear();
-    Value::parse(R"({"a":1,})", &err);
+    (void)Value::parse(R"({"a":1,})", &err);
     PRISM_CHECK(!err.empty());
     err.clear();
-    Value::parse(R"({"a":1} trailing)", &err);
+    (void)Value::parse(R"({"a":1} trailing)", &err);
     PRISM_CHECK(err.find("trailing") != std::string::npos);
     err.clear();
-    Value::parse(R"({"a":tru})", &err);
+    (void)Value::parse(R"({"a":tru})", &err);
     PRISM_CHECK(!err.empty());
 }
 
