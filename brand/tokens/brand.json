@@ -1,0 +1,16 @@
+{
+  "name": "PRISM ENGINE",
+  "tagline": "Every Angle. Every World. One File.",
+  "colors": {
+    "prismViolet": "#7C3AED",
+    "spectrumCyan": "#00D9FF",
+    "prismGold": "#FFC93C",
+    "sunsetMagenta": "#FF3D9A",
+    "darkBackground": "#0A0A12"
+  },
+  "fonts": { "ui": "Inter", "code": "JetBrains Mono" },
+  "mascot": "Ray — light-beam sprite",
+  "license": "MIT",
+  "domainIntent": "prismengine.dev",
+  "output": "Android APK only"
+}
