@@ -44,10 +44,11 @@ jobs:
             tail -120 "$RUNNER_TEMP/prism-gradle.log"
             # Hosted logs may be unavailable to external automation; emit actionable
             # compiler/build errors as GitHub check annotations (viewable via API).
-            grep -E '(error:|FAILURE:|What went wrong:|Could not|Execution failed|CMake Error|failed|not found|BUILD FAILED)' \
-              "$RUNNER_TEMP/prism-gradle.log" | tail -30 | while IFS= read -r line; do
-                echo "::error::$line"
-              done
+            excerpt="$(tail -90 "$RUNNER_TEMP/prism-gradle.log")"
+            excerpt="${excerpt//'%'/'%25'}"
+            excerpt="${excerpt//$'\r'/'%0D'}"
+            excerpt="${excerpt//$'\n'/'%0A'}"
+            echo "::error::$excerpt"
             exit 1
           fi
       - name: Check APK is nonempty and Android-only
