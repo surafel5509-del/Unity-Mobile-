@@ -1,0 +1,15 @@
+// PRISM ENGINE — bundled sample script, parsed and run by the native C++ VM.
+// Everything here works without an internet connection.
+class DemoGame {
+    var title = "Every Angle. Every World. One File.";
+    var points = 0;
+    func start() {
+        print("PRISM:", this.title);
+    }
+    func update(dt) {
+        this.points += dt;
+    }
+}
+var game = new DemoGame();
+game.start();
+print("PrismScript ready — native C++ runtime");

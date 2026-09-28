@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- No INTERNET permission: the default build is genuinely offline. -->
+    <uses-feature android:glEsVersion="0x00030000" android:required="true" />
+    <application android:allowBackup="false" android:label="PRISM ENGINE"
+        android:theme="@android:style/Theme.Material.NoActionBar"
+        android:usesCleartextTraffic="false"
+        android:extractNativeLibs="true">
+        <activity android:name="dev.prismengine.runtime.PrismActivity"
+            android:exported="true" android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|keyboardHidden|density"
+            android:resizeableActivity="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

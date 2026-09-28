@@ -1,0 +1,2 @@
+-keep class dev.prismengine.runtime.PrismBridge { *; }
+-keep class dev.prismengine.runtime.PrismActivity { *; }
