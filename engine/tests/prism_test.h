@@ -86,3 +86,14 @@ inline int run_all(const char* filter = nullptr) {
             ::prism::test::fail(__FILE__, __LINE__, os.str());                  \
         }                                                                       \
     } while (0)
+
+#define PRISM_CHECK_NE(a, b)                                                    \
+    do {                                                                        \
+        ++::prism::test::checks();                                              \
+        auto va = (a); auto vb = (b);                                           \
+        if ((va == vb)) {                                                       \
+            std::ostringstream os;                                              \
+            os << #a << " != " << #b << "  (both " << va << ")";                \
+            ::prism::test::fail(__FILE__, __LINE__, os.str());                  \
+        }                                                                       \
+    } while (0)
