@@ -1,0 +1,3 @@
+{"version":1,"name":"One Tap","coordinates":"normalized","controls":[
+  {"name":"tap","kind":"tapZone","rect":[0.0,0.0,1.0,1.0],"button":"action"}
+]}

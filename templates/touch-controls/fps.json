@@ -1,0 +1,6 @@
+{"version":1,"name":"FPS","coordinates":"normalized","controls":[
+  {"name":"move","kind":"joystick","rect":[0.03,0.55,0.30,0.40],"axes":["horizontal","vertical"],"deadZone":0.14},
+  {"name":"look","kind":"swipe","rect":[0.36,0.10,0.62,0.78],"axes":["look_x","look_y"]},
+  {"name":"fire","kind":"button","rect":[0.80,0.58,0.16,0.22],"button":"fire"},
+  {"name":"jump","kind":"button","rect":[0.72,0.83,0.12,0.14],"button":"jump"}
+]}

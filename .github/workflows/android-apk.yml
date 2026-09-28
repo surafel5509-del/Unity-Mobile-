@@ -37,7 +37,19 @@ jobs:
           gradle-version: '8.9'
       - name: Build installable debug APK
         working-directory: android
-        run: gradle --no-daemon :app:assembleDebug
+        run: |
+          if gradle --no-daemon :app:assembleDebug > "$RUNNER_TEMP/prism-gradle.log" 2>&1; then
+            tail -30 "$RUNNER_TEMP/prism-gradle.log"
+          else
+            tail -120 "$RUNNER_TEMP/prism-gradle.log"
+            # Hosted logs may be unavailable to external automation; emit actionable
+            # compiler/build errors as GitHub check annotations (viewable via API).
+            grep -E '(error:|FAILURE:|What went wrong:|Could not|Execution failed|CMake Error|failed|not found|BUILD FAILED)' \
+              "$RUNNER_TEMP/prism-gradle.log" | tail -30 | while IFS= read -r line; do
+                echo "::error::$line"
+              done
+            exit 1
+          fi
       - name: Check APK is nonempty and Android-only
         run: |
           test -s android/app/build/outputs/apk/debug/app-debug.apk
