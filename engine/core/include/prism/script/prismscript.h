@@ -58,7 +58,7 @@ private:
 // -------------------------------------------------------------------- ast --
 struct Expr;   using ExprPtr = std::shared_ptr<Expr>;
 struct Stmt;   using StmtPtr = std::shared_ptr<Stmt>;
-struct Environment;
+class Environment;
 class Interpreter;
 
 struct Expr {

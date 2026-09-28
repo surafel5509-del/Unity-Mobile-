@@ -29,7 +29,7 @@ class PrismStudioActivity : Activity() {
     private val cyan = Color.rgb(0, 217, 255)
     private val gold = Color.rgb(255, 201, 60)
     private val magenta = Color.rgb(255, 61, 154)
-    private val background = Color.rgb(10, 10, 18)
+    private val bgColor = Color.rgb(10, 10, 18)
     private val surface = Color.rgb(24, 24, 38)
     private val muted = Color.rgb(150, 150, 175)
     private val entities = mutableListOf("Ray", "Main Camera", "Sun Light", "Terrain")
@@ -46,7 +46,7 @@ class PrismStudioActivity : Activity() {
             View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         root = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setBackgroundColor(background)
+            setBackgroundColor(bgColor)
             setPadding(dp(12), dp(8), dp(12), dp(8))
         }
         root.addView(buildHeader())
@@ -108,7 +108,7 @@ class PrismStudioActivity : Activity() {
             message("Created $name in this editor session")
         })
         entities.forEach { entity ->
-            addView(action(if (entity == selectedEntity) "◆  $entity" else "◇  $entity", if (entity == selectedEntity) surface else background) {
+            addView(action(if (entity == selectedEntity) "◆  $entity" else "◇  $entity", if (entity == selectedEntity) surface else bgColor) {
                 selectedEntity = entity
                 showTab("Scene")
             })

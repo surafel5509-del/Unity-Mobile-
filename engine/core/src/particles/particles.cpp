@@ -9,10 +9,6 @@
 
 namespace prism::particles {
 
-namespace {
-inline f32 clampf(f32 v, f32 lo, f32 hi) { return v < lo ? lo : (v > hi ? hi : v); }
-} // namespace
-
 // ================================================================ curves ==
 f32 eval_curve(const std::vector<FloatStop>& stops, f32 t, f32 fallback) {
     if (stops.empty()) return fallback;
