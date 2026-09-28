@@ -5,7 +5,7 @@
 `./build_tests.sh` compiles every C++ runtime source and test with C++20,
 `-Wall -Wextra` and threads, then runs `build-host/prism_tests`. Passing an
 argument filters by substring (`./build_tests.sh net_`). The suite is
-**148 tests / 5,699 assertions / 0 failures** and must pass before Android CI
+**181 tests / 6,974 checks / 0 failures** and must pass before Android CI
 builds.
 
 | File | Tests | What it pins down |
@@ -21,6 +21,11 @@ builds.
 | `test_net.cpp` | 28 | bit packing, packet codec, ack bitmask, retransmission, RFC 6298 RTT, discovery, sessions, rollback resimulation, lag compensation, snapshot interpolation, a real UDP loopback round trip |
 | `test_assets.cpp` | 21 | `.prism` container round trip and tamper detection, dependency graph and build order, atlas packing, mesh primitives and winding, ETC1/ETC2 known-answer vectors, mip chains |
 | `test_ui.cpp` | 18 | flexbox layout and grow shares, alignment, hit testing, button/slider/toggle interaction, draw-command ordering, 7-language localisation, touch bindings |
+| `test_anim.cpp` | 7 | skeleton transforms, pose blend/additive, sorted keyframe sampling, clip wrap/events, crossfade, two-bone IK |
+| `test_particles.cpp` | 5 | curve/gradient interpolation, emitter shapes, pool/lifetime, ground bounce/render instances, seeded determinism |
+| `test_physics3d.cpp` | 9 | collider bounds/contact, sphere and box rest/sleep, capsule, elastic/inelastic impulses, momentum, raycasts, determinism |
+| `test_terrain.cpp` | 7 | raise/smooth/flatten brushes, bilinear sample, normals, terrain raycast/mesh, deterministic painted foliage scatter |
+| `test_scene.cpp` | 5 | hierarchy/world transform, scale composition, lookup/destroy/reparent, component inspector bags, JSON round-trip |
 
 Coverage is behavioural rather than line-based: each subsystem has at least one
 test that would fail if the algorithm regressed, and several were written to
@@ -30,8 +35,10 @@ mip chain that read a moved-from buffer, an inside-out sphere winding, a
 double-fired UI tap).
 
 Known gaps: no GPU-side tests (nothing submits Vulkan or GLES work), no
-on-device automation, no performance regression gate, and no coverage of
-subsystems that do not exist yet (3D physics, animation, particles, terrain).
+on-device automation, no performance regression gate. The new 3D physics,
+animation, particle, terrain and scene tests exercise their host-side C++
+algorithms only; those subsystems are not yet connected to the Android demo's
+runtime loop or GPU renderer.
 
 ## APK CI
 

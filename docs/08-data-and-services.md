@@ -40,7 +40,7 @@ Android permission-gated multicast discovery → local UDP transport → reliabl
 
 ## Other target services
 
-Audio mixer, notifications, haptics, Camera2/CameraX, GPS, NFC, biometrics, share sheet, XR/AR, accessibility, localization and plugin sandbox require separate Android permission/capability adapters. None are included in the current demo; no placeholder Java APIs misrepresent coverage.
+Audio mixer output, notifications, haptics, Camera2/CameraX, GPS, NFC, biometrics, share sheet, XR/AR, accessibility and plugin sandbox require separate Android permission/capability adapters. None are included in the current demo; the Kotlin host does not claim coverage for these APIs.
 
 ## LAN multiplayer and the INTERNET permission
 

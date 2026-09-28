@@ -2,7 +2,7 @@
 
 **Every Angle. Every World. One File.** · Android APK only · MIT · offline-first
 
-> **Status: early engine foundation, not a finished Unity-equivalent.** This repository was started from an empty README. The C++20 core, PrismScript interpreter, math/ECS/jobs, crypto, JSON, render-pipeline planning, audio mixer, game AI, LAN networking with rollback, the `.prism` asset container, the runtime UI layer, 2D physics, the Android demo and 148 host tests are implemented. **Not present:** a Vulkan or GLES backend that executes the render graph, 3D physics, animation, particles, terrain, the graphical editor, ML, AR and monetization. See [feature status](docs/01-architecture.md#implemented-module-by-module).
+> **Status: early engine foundation, not a finished Unity-equivalent.** The C++20 core, PrismScript interpreter, math/ECS/jobs, crypto, JSON, render-pipeline planning, audio mixer, game AI, LAN networking with rollback, `.prism` asset container, runtime UI, 2D physics, plus host-tested 3D physics, animation, particles, terrain and scene graph are implemented. The Android runtime host is Kotlin; the APK demo remains a GLES 3 prototype. **Not present:** a Vulkan backend executing the render graph, full graphical IDE, ML, AR, and monetization. The new C++ modules are not yet integrated into the APK runtime. See [feature status](docs/01-architecture.md#implemented-module-by-module).
 
 ![PRISM logo](brand/logo/prism-logo.svg)
 
@@ -28,9 +28,9 @@ The GitHub Actions [Android APK](.github/workflows/android-apk.yml) workflow ins
 
 | Directory | Purpose |
 |---|---|
-| `engine/core` | Native C++20 runtime (~13,400 lines): core, math, ECS, jobs, input, script VM, crypto, JSON, render planning, audio, AI, networking, assets, UI, 2D physics, Android GPU profiling |
-| `engine/tests` | Zero-dependency host unit tests (148 tests, 5,699 assertions) |
-| `android` | One Android application; JNI + GLES 3 renderer; emits an installable APK |
+| `engine/core` | Native C++20 runtime (~15,200 lines): core, math, ECS, jobs, input, script VM, crypto, JSON, render planning, audio, AI, networking, assets, UI, 2D + 3D physics, animation, particles, terrain, scene graph, Android GPU profiling |
+| `engine/tests` | Zero-dependency host unit tests (181 tests, 6,974 assertions) |
+| `android` | One Android application (Kotlin game host + offline Prism Studio panel shell + JNI + GLES 3 renderer); imports selected assets into private app storage and emits an installable APK |
 | `editor/src/PrismEditor` | .NET 8 **CLI starter** for project creation/inspection (not a scene IDE or working custom export) |
 | `samples` | Scene/template descriptions for future importer |
 | `templates` | Touch layout and offline save/unlock design templates |

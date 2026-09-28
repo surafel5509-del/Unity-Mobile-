@@ -6,6 +6,10 @@
         android:theme="@android:style/Theme.Material.NoActionBar"
         android:usesCleartextTraffic="false"
         android:extractNativeLibs="true">
+        <activity android:name="dev.prismengine.runtime.PrismStudioActivity"
+            android:exported="false" android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|keyboardHidden|density"
+            android:resizeableActivity="false" />
         <activity android:name="dev.prismengine.runtime.PrismActivity"
             android:exported="true" android:screenOrientation="landscape"
             android:configChanges="orientation|screenSize|keyboardHidden|density"

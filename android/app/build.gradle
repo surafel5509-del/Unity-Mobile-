@@ -1,4 +1,7 @@
-plugins { id 'com.android.application' }
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
 
 android {
     namespace 'dev.prismengine.runtime'
@@ -45,4 +48,11 @@ android {
     buildFeatures { buildConfig true }
     packaging { jniLibs { useLegacyPackaging true } }
     compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    kotlinOptions { jvmTarget = '17' }
+}
+
+dependencies {
+    // The Kotlin Android plugin also wires the stdlib in automatically; we pin
+    // it explicitly so the offline CI build resolves a known-good version.
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:2.0.21'
 }

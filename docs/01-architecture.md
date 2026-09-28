@@ -19,7 +19,7 @@ PRISM ENGINE is an Android-APK-only engine **in early development**, not a finis
                                           │  one installable APK
                                           ▼
 ┌────────────────────────────────────────────────────────────────────────────────┐
-│ Android Activity → GLSurfaceView → JNI → C++20 Engine                         │
+│ Android Activity (Kotlin) → GLSurfaceView → JNI → C++20 Engine             │
 │                                      │                                         │
 │   ┌──────────────────────────────────┴─────────────────────────────────────┐   │
 │   │ Typed runtime EventBus + ServiceRegistry + Clock + Quality governor    │   │
@@ -28,8 +28,8 @@ PRISM ENGINE is an Android-APK-only engine **in early development**, not a finis
 │    ECS  Jobs  Script  Physics2D Input  Audio    AI    Net   Assets/UI       │
 │     │     │     │       │         │      │       │      │      │             │
 │     └─────┴─────┴───────┴─────────┴──────┴───────┴──────┴──────┴─────────┐   │
-│  Not yet: Vulkan backend, 3D physics, animation, particles, terrain,      │   │
-│           profiler UI, plugin loader, XR, ML agents                       │   │
+│  Host-tested, not yet wired to runtime: 3D physics, animation, particles, │   │
+│  terrain, scene. Not yet: Vulkan, profiler UI, plugins, XR, ML agents     │   │
 └───────────────────────────────────────────────────────────────────────────┘   │
                                                                                 │
                                Private Android files / offline project assets ─┘
@@ -54,12 +54,17 @@ PRISM ENGINE is an Android-APK-only engine **in early development**, not a finis
 | Networking | `prism/net` | bit packing, reliable-over-unreliable, RFC 6298 RTT, LAN discovery, host/client sessions, rollback + resimulation, lag compensation, snapshot interpolation | Bluetooth transport, LAN voice |
 | Assets | `prism/assets` | `.prism` container with content addressing and tamper detection, dependency graph, atlas packing, meshes + primitives, ETC1/ETC2 codec, mip chains | texture streaming, async import, ASTC encoder |
 | UI | `prism/ui` | flexbox-subset layout, 7 widgets, draw-command output, focus/hit-testing, 7-language offline localisation, touch-control binding | text shaping, scroll views, IME input |
-| Android | `android/app` | API 26–35, arm64-v8a + armeabi-v7a, landscape, JNI, no INTERNET | permission-gated device APIs, Vulkan detection |
+| Android | `android/app` | Kotlin game Activity + GLES surface + Canvas HUD; offline Prism Studio shell with hierarchy/inspector, asset shelf, terrain, foliage, animation, and modeling panels; device file-picker copies assets into private app storage. API 26–35, arm64-v8a + armeabi-v7a, JNI, no INTERNET | scene edits remain session-only; Studio tools are not yet wired to native editors/rendering; permission-gated device APIs, Vulkan detection |
 | Editor | `editor/src/PrismEditor` | .NET 8 CLI project create / inspect | graphical IDE and custom-project export |
 | APK exporter | `tools/build-apk.sh` | offline Gradle debug/release APK, optional ADB install | bundled toolchain, custom assets/projects, Wi-Fi QR |
-| 3D physics, Animation, Particles, Terrain, Profiler UI, Plugins, Save/IAP, XR, ML | not yet | design contracts in docs | implementation, testing, integration |
+| 3D physics | `prism/physics3d` | sphere/box/capsule colliders, AABB broadphase, impulse solver (restitution + friction), positional correction, sleeping, raycast; deterministic | angular dynamics, CCD, joints, wiring into the APK runtime |
+| Animation | `prism/anim` | skeletons, poses, keyframe tracks, blend/additive, clips with looping + events, animator crossfades, analytic two-bone IK | GPU skinning, blend trees, retargeting, runtime wiring |
+| Particles | `prism/particles` | emitter shapes, rate/lifetime pool, gravity, turbulence, size/colour-over-life, ground bounce; seeded + deterministic | GPU particles, renderer wiring |
+| Terrain | `prism/terrain` | heightfield sculpting (raise/smooth/flatten), bilinear sampling, normals, ray marching, mesh export, foliage density paint + deterministic scatter | LOD/CDCD, splat maps, runtime wiring |
+| Scene | `prism/scene` | node hierarchy, world-transform composition, inspector component bags, JSON round-trip | prefab merge, runtime wiring |
+| Profiler UI, Plugins, Save/IAP, XR, ML, mesh booleans/CSG | not yet | design contracts in docs | implementation, testing, integration |
 
-**Important:** `Physics2D::Joint` is currently a descriptor; `add_joint` stores it but no joint solver is run. `prism/render` builds and validates render pipelines but does not submit GPU work — the APK still draws with a hand-written GLES 3 renderer in `prism_android.cpp`. There is no 3D physics engine and no Vulkan backend. The audio mixer produces samples but nothing writes them to an Android audio device yet.
+**Important:** `Physics2D::Joint` is currently a descriptor; `add_joint` stores it but no joint solver is run. `prism/render` builds and validates render pipelines but does not submit GPU work — the APK still draws with a hand-written GLES 3 renderer in `prism_android.cpp`. There is no Vulkan backend. The audio mixer produces samples but nothing writes them to an Android audio device yet. The `physics3d`, `anim`, `particles`, `terrain` and `scene` modules are implemented and covered by the host test suite, but are **not yet wired into the APK runtime** — the shipped demo still drives the 2D physics world directly, with no GPU skinning, particle/terrain rendering, or scene-graph playback.
 
 ## Repository structure
 
@@ -67,9 +72,10 @@ PRISM ENGINE is an Android-APK-only engine **in early development**, not a finis
 Unity-Mobile-/
   README.md  LICENSE  .gitignore
   .github/workflows/android-apk.yml
-  android/{build.gradle,settings.gradle,app/src/main/{assets,cpp,java,AndroidManifest.xml}}
-  engine/{core/{include/prism/{core,math,ecs,jobs,input,physics2d,script,
-         render,audio,ai,net,assets,ui,platform},src},tests}
+  android/{build.gradle,settings.gradle,app/src/main/{assets,cpp,java(Kotlin),AndroidManifest.xml}}
+  engine/{core/{include/prism/{core,math,ecs,jobs,input,physics2d,physics3d,
+         script,render,audio,ai,net,assets,ui,anim,particles,terrain,scene,
+         platform},src},tests}
   editor/src/PrismEditor/{PrismEditor.csproj,Program.cs}
   samples/{platformer2d,fps3d,rpg,hypercasual}
   templates/{touch-controls,save-unlock.md}
