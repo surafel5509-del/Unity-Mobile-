@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+      - name: Validate offline starter-kit source assets
+        run: python3 tools/check_starter_kits.py
       - name: C++20 host tests
         run: ./build_tests.sh
   android-apk:
@@ -56,6 +58,9 @@ jobs:
           test -s android/app/build/outputs/apk/debug/app-debug.apk
           unzip -l android/app/build/outputs/apk/debug/app-debug.apk | grep 'lib/arm64-v8a/libprism_runtime.so'
           unzip -l android/app/build/outputs/apk/debug/app-debug.apk | grep 'assets/sample.prism'
+          for kit in skyrail_2d ember_dungeon_2d chromatic_tiles_2d neon_circuit_3d orbit_foundry_3d wildlight_tactics_3d; do
+            unzip -l android/app/build/outputs/apk/debug/app-debug.apk | grep -q "$kit/project.prism.json"
+          done
           du -h android/app/build/outputs/apk/debug/app-debug.apk
       - uses: actions/upload-artifact@v4
         with:

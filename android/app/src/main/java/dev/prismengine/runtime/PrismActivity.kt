@@ -17,6 +17,8 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.Button
 import android.view.Gravity
+import java.io.File
+import org.json.JSONObject
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import kotlin.math.min
@@ -43,10 +45,23 @@ class PrismActivity : Activity() {
             View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
 
         var source = "print(\"PRISM sample booted\");"
-        try {
-            assets.open("sample.prism").use { input ->
-                source = input.readBytes().toString(Charsets.UTF_8)
+        val projectRoot = intent.getStringExtra(PrismStudioActivity.EXTRA_PROJECT_ROOT)?.let(::File)
+        var loadedProjectScript = false
+        if (projectRoot != null) {
+            try {
+                val manifest = JSONObject(File(projectRoot, "project.prism.json").readText())
+                val relativeScript = manifest.optString("script", "scripts/main.prism")
+                val script = File(projectRoot, relativeScript)
+                if (script.canonicalPath.startsWith(projectRoot.canonicalPath + File.separator) && script.isFile) {
+                    source = script.readText()
+                    loadedProjectScript = true
+                }
+            } catch (e: Exception) {
+                Log.e("Prism", "project script unavailable; using bundled fallback", e)
             }
+        }
+        if (!loadedProjectScript) try {
+            assets.open("sample.prism").use { input -> source = input.readBytes().toString(Charsets.UTF_8) }
         } catch (e: Exception) {
             Log.e("Prism", "sample script missing", e)
         }
@@ -65,7 +80,10 @@ class PrismActivity : Activity() {
             isAllCaps = false
             setTextColor(android.graphics.Color.WHITE)
             backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.rgb(124, 58, 237))
-            setOnClickListener { startActivity(Intent(this@PrismActivity, PrismStudioActivity::class.java)) }
+            setOnClickListener {
+                startActivity(Intent(this@PrismActivity, PrismStudioActivity::class.java)
+                    .putExtra(PrismStudioActivity.EXTRA_PROJECT_ROOT, intent.getStringExtra(PrismStudioActivity.EXTRA_PROJECT_ROOT)))
+            }
         }
         frame.addView(studio, FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.WRAP_CONTENT,

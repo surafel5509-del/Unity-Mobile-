@@ -1,0 +1,19 @@
+{
+  "name": "Wildlight Tactics",
+  "packageId": "dev.prismengine.starter.wildlight_tactics_3d",
+  "version": "1.0.0",
+  "template": "starter-kit",
+  "genre": "Turn-based tactics",
+  "dimension": "3D",
+  "entryScene": "scenes/main.scene.json",
+  "script": "scripts/main.prism",
+  "render": {
+    "api": "gles3-fallback",
+    "quality": "adaptive",
+    "targetFps": 60
+  },
+  "export": {
+    "only": "android-apk"
+  },
+  "offline": true
+}

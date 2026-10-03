@@ -19,5 +19,6 @@ object PrismBridge {
     @JvmStatic external fun nativeFrame(deltaSeconds: Float)
     @JvmStatic external fun nativeTouch(action: Int, x: Float, y: Float)
     @JvmStatic external fun nativeStats(): String
+    @JvmStatic external fun nativeValidateScript(source: String): String
     @JvmStatic external fun nativeDestroy()
 }

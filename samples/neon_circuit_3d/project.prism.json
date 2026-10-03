@@ -1,0 +1,19 @@
+{
+  "name": "Neon Circuit",
+  "packageId": "dev.prismengine.starter.neon_circuit_3d",
+  "version": "1.0.0",
+  "template": "starter-kit",
+  "genre": "Arcade time trial",
+  "dimension": "3D",
+  "entryScene": "scenes/main.scene.json",
+  "script": "scripts/main.prism",
+  "render": {
+    "api": "gles3-fallback",
+    "quality": "adaptive",
+    "targetFps": 60
+  },
+  "export": {
+    "only": "android-apk"
+  },
+  "offline": true
+}

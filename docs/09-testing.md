@@ -5,14 +5,15 @@
 `./build_tests.sh` compiles every C++ runtime source and test with C++20,
 `-Wall -Wextra` and threads, then runs `build-host/prism_tests`. Passing an
 argument filters by substring (`./build_tests.sh net_`). The suite is
-**181 tests / 6,974 checks / 0 failures** and must pass before Android CI
-builds.
+**182 tests / 6,992 checks / 0 failures** and must pass before Android CI
+builds. The CI workflow also runs `python3 tools/check_starter_kits.py` before C++ compilation.
 
 | File | Tests | What it pins down |
 |---|---|---|
 | `test_core.cpp` | 6 | engine lifecycle, fixed-step clock, pools, log ring, typed bus, registry |
 | `test_math.cpp` | 9 | vectors, Mat4, Quat, transforms, brand palette |
 | `test_script.cpp` | 6 | PrismScript functions, closures, classes, collections, error reports, the bundled `sample.prism` |
+| `test_starter_kits.cpp` | 1 | Executes all six bundled 2D/3D starter-kit PrismScript entry points in the native interpreter |
 | `test_crypto.cpp` | 9 | SHA-256, HMAC-SHA256, ChaCha20 and Poly1305 against RFC 8439 vectors, CRC-32, unlock codes, plus a 500-case AEAD fuzz |
 | `test_json.cpp` | 7 | parser/serializer round trips, escapes, surrogate pairs, error reporting |
 | `test_render.cpp` | 15 | GPU-profile detection and quality tiers, spectral dispersion, tonemapping, frame-graph ordering, light grid, LOD, adaptive resolution |

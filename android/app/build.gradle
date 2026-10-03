@@ -45,6 +45,9 @@ android {
             version '3.22.1'
         }
     }
+    sourceSets {
+        main { assets.srcDir '../../samples' }
+    }
     buildFeatures { buildConfig true }
     packaging { jniLibs { useLegacyPackaging true } }
     compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }

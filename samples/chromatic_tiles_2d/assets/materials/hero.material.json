@@ -1,0 +1,16 @@
+{
+  "name": "Chromatic Tiles_Hero",
+  "shader": "prism/pbr_spectral",
+  "baseColor": [
+    "#00D9FF",
+    "#FFC93C",
+    "#FFFFFF"
+  ],
+  "metallic": 0.0,
+  "roughness": 0.42,
+  "emissive": "#FFC93C",
+  "textures": {
+    "albedo": "../textures/hero_albedo.svg",
+    "emissive": "../textures/world_emissive.svg"
+  }
+}

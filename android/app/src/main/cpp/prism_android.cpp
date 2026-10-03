@@ -226,7 +226,22 @@ JNIEXPORT jstring JNICALL Java_dev_prismengine_runtime_PrismBridge_nativeStats(J
     std::string msg="GLES 3  |  "+std::to_string(fps.load())+" FPS  |  "+std::to_string(frames.load())+" frames";
     return env->NewStringUTF(msg.c_str());
 }
+JNIEXPORT jstring JNICALL Java_dev_prismengine_runtime_PrismBridge_nativeValidateScript(JNIEnv* env,jclass,jstring source){
+    const char* utf=env->GetStringUTFChars(source,nullptr);
+    script::Lexer lexer(utf?utf:"");
+    auto tokens=lexer.tokenize();
+    std::string result;
+    if(lexer.had_error()) result="Lexer error: "+lexer.error();
+    else {
+        script::Parser parser(std::move(tokens));
+        (void)parser.parse_program();
+        result=parser.had_error()?"Parser error: "+parser.error():"PrismScript syntax OK";
+    }
+    if(utf)env->ReleaseStringUTFChars(source,utf);
+    return env->NewStringUTF(result.c_str());
+}
 JNIEXPORT void JNICALL Java_dev_prismengine_runtime_PrismBridge_nativeDestroy(JNIEnv*,jclass){
+
     renderer.destroy();physics.reset();vm.reset();
     if(engine){engine->shutdown();engine.reset();}
 }

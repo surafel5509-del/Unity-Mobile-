@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "layout": "landscape",
+  "safeArea": true,
+  "controls": [
+    {
+      "type": "virtual-stick",
+      "name": "Move",
+      "anchor": "bottom-left",
+      "radius": 92,
+      "action": "move"
+    },
+    {
+      "type": "button",
+      "name": "Primary",
+      "anchor": "bottom-right",
+      "radius": 52,
+      "action": "primary"
+    },
+    {
+      "type": "button",
+      "name": "Pause",
+      "anchor": "top-right",
+      "radius": 30,
+      "action": "pause"
+    }
+  ]
+}

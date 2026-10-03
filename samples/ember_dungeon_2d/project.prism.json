@@ -1,0 +1,19 @@
+{
+  "name": "Ember Dungeon",
+  "packageId": "dev.prismengine.starter.ember_dungeon_2d",
+  "version": "1.0.0",
+  "template": "starter-kit",
+  "genre": "Top-down action RPG",
+  "dimension": "2D",
+  "entryScene": "scenes/main.scene.json",
+  "script": "scripts/main.prism",
+  "render": {
+    "api": "gles3-fallback",
+    "quality": "adaptive",
+    "targetFps": 60
+  },
+  "export": {
+    "only": "android-apk"
+  },
+  "offline": true
+}

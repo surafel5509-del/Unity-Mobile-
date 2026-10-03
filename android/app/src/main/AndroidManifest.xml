@@ -11,6 +11,10 @@
             android:configChanges="orientation|screenSize|keyboardHidden|density"
             android:resizeableActivity="false" />
         <activity android:name="dev.prismengine.runtime.PrismActivity"
+            android:exported="false" android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|keyboardHidden|density"
+            android:resizeableActivity="false" />
+        <activity android:name="dev.prismengine.runtime.ProjectManagerActivity"
             android:exported="true" android:screenOrientation="landscape"
             android:configChanges="orientation|screenSize|keyboardHidden|density"
             android:resizeableActivity="false">

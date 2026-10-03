@@ -1,0 +1,10 @@
+// Orbit Foundry · PrismScript gameplay starter
+// Runs offline in PRISM's C++20 interpreter. Adapt the game rules and connect
+// action callbacks to the platform input adapter in your project.
+var energy = 100;
+var consoles = 0;
+func start() { print("Orbit Foundry ready"); }
+func update(dt) { if (energy < 0) { energy = 0; } }
+func interact(object_id) { consoles += 1; print("Activated:", object_id); }
+func spend_energy(amount) { energy -= amount; }
+start();

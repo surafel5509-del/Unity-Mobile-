@@ -1,0 +1,19 @@
+{
+  "name": "Orbit Foundry",
+  "packageId": "dev.prismengine.starter.orbit_foundry_3d",
+  "version": "1.0.0",
+  "template": "starter-kit",
+  "genre": "Sci-fi exploration",
+  "dimension": "3D",
+  "entryScene": "scenes/main.scene.json",
+  "script": "scripts/main.prism",
+  "render": {
+    "api": "gles3-fallback",
+    "quality": "adaptive",
+    "targetFps": 60
+  },
+  "export": {
+    "only": "android-apk"
+  },
+  "offline": true
+}

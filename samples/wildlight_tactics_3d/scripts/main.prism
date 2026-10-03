@@ -1,0 +1,11 @@
+// Wildlight Tactics · PrismScript gameplay starter
+// Runs offline in PRISM's C++20 interpreter. Adapt the game rules and connect
+// action callbacks to the platform input adapter in your project.
+var active_turn = 0;
+var squad_size = 2;
+var mission_complete = false;
+func start() { print("Wildlight Tactics ready"); }
+func update(dt) { if (mission_complete) { print("Mission clear"); } }
+func finish_turn() { active_turn += 1; if (active_turn >= squad_size) { active_turn = 0; } }
+func complete_mission() { mission_complete = true; }
+start();

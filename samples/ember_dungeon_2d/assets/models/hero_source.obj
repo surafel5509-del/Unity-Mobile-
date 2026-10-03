@@ -1,0 +1,12 @@
+# Warden — editable low-poly OBJ source (metres; +Y up)
+o Warden
+v -0.500 0 -0.500
+v 0.500 0 -0.500
+v 0.500 0 0.500
+v -0.500 0 0.500
+v 0 1.000 0
+f 1 2 5
+f 2 3 5
+f 3 4 5
+f 4 1 5
+f 4 3 2 1

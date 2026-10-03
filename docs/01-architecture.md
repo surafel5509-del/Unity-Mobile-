@@ -19,7 +19,7 @@ PRISM ENGINE is an Android-APK-only engine **in early development**, not a finis
                                           │  one installable APK
                                           ▼
 ┌────────────────────────────────────────────────────────────────────────────────┐
-│ Android Activity (Kotlin) → GLSurfaceView → JNI → C++20 Engine             │
+│ Kotlin Project Hub → Prism Studio → game Activity / GLSurfaceView → JNI   │
 │                                      │                                         │
 │   ┌──────────────────────────────────┴─────────────────────────────────────┐   │
 │   │ Typed runtime EventBus + ServiceRegistry + Clock + Quality governor    │   │
@@ -54,7 +54,7 @@ PRISM ENGINE is an Android-APK-only engine **in early development**, not a finis
 | Networking | `prism/net` | bit packing, reliable-over-unreliable, RFC 6298 RTT, LAN discovery, host/client sessions, rollback + resimulation, lag compensation, snapshot interpolation | Bluetooth transport, LAN voice |
 | Assets | `prism/assets` | `.prism` container with content addressing and tamper detection, dependency graph, atlas packing, meshes + primitives, ETC1/ETC2 codec, mip chains | texture streaming, async import, ASTC encoder |
 | UI | `prism/ui` | flexbox-subset layout, 7 widgets, draw-command output, focus/hit-testing, 7-language offline localisation, touch-control binding | text shaping, scroll views, IME input |
-| Android | `android/app` | Kotlin game Activity + GLES surface + Canvas HUD; offline Prism Studio shell with hierarchy/inspector, asset shelf, terrain, foliage, animation, and modeling panels; device file-picker copies assets into private app storage. API 26–35, arm64-v8a + armeabi-v7a, JNI, no INTERNET | scene edits remain session-only; Studio tools are not yet wired to native editors/rendering; permission-gated device APIs, Vulkan detection |
+| Android | `android/app` | Kotlin offline project manager (new/open/clone/delete), six bundled source kits, persistent hierarchy/transform JSON, UI layout builder, PNG texture painter, touch-profile editor, PrismScript text editor + native syntax validation, OBJ source generation, local asset import; API 26–35, arm64-v8a + armeabi-v7a, JNI, no INTERNET | GLES demo still renders a hard-coded scene; native runtime import of scenes/materials/textures, terrain/foliage/animation editor binding, full mesh tools, device APIs, Vulkan |
 | Editor | `editor/src/PrismEditor` | .NET 8 CLI project create / inspect | graphical IDE and custom-project export |
 | APK exporter | `tools/build-apk.sh` | offline Gradle debug/release APK, optional ADB install | bundled toolchain, custom assets/projects, Wi-Fi QR |
 | 3D physics | `prism/physics3d` | sphere/box/capsule colliders, AABB broadphase, impulse solver (restitution + friction), positional correction, sleeping, raycast; deterministic | angular dynamics, CCD, joints, wiring into the APK runtime |

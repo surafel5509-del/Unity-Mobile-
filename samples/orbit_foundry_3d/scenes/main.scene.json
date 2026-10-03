@@ -1,0 +1,231 @@
+{
+  "version": 1,
+  "name": "Main",
+  "dimension": "3D",
+  "entities": [
+    {
+      "id": "orbit_foundry_3d-01",
+      "name": "Foundry_Room",
+      "position": [
+        -1.88,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "components": {
+        "Transform": {
+          "enabled": true
+        },
+        "Metadata": {
+          "role": "game-object"
+        }
+      }
+    },
+    {
+      "id": "orbit_foundry_3d-02",
+      "name": "Explorer",
+      "position": [
+        -0.62,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "components": {
+        "Transform": {
+          "enabled": true
+        },
+        "Metadata": {
+          "role": "player"
+        }
+      }
+    },
+    {
+      "id": "orbit_foundry_3d-03",
+      "name": "Energy_Core",
+      "position": [
+        0.62,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "components": {
+        "Transform": {
+          "enabled": true
+        },
+        "Metadata": {
+          "role": "game-object"
+        }
+      }
+    },
+    {
+      "id": "orbit_foundry_3d-04",
+      "name": "Console_A",
+      "position": [
+        1.88,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "components": {
+        "Transform": {
+          "enabled": true
+        },
+        "Metadata": {
+          "role": "game-object"
+        }
+      }
+    },
+    {
+      "id": "orbit_foundry_3d-05",
+      "name": "Door_A",
+      "position": [
+        -1.88,
+        0.0,
+        1.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "components": {
+        "Transform": {
+          "enabled": true
+        },
+        "Metadata": {
+          "role": "game-object"
+        }
+      }
+    },
+    {
+      "id": "orbit_foundry_3d-06",
+      "name": "FirstPersonCamera",
+      "position": [
+        -0.62,
+        0.0,
+        1.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "components": {
+        "Transform": {
+          "enabled": true
+        },
+        "Metadata": {
+          "role": "game-object"
+        }
+      }
+    },
+    {
+      "id": "orbit_foundry_3d-07",
+      "name": "FillLight",
+      "position": [
+        0.62,
+        0.0,
+        1.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "components": {
+        "Transform": {
+          "enabled": true
+        },
+        "Metadata": {
+          "role": "game-object"
+        }
+      }
+    },
+    {
+      "id": "orbit_foundry_3d-08",
+      "name": "InteractHUD",
+      "position": [
+        1.88,
+        0.0,
+        1.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "components": {
+        "Transform": {
+          "enabled": true
+        },
+        "Metadata": {
+          "role": "game-object"
+        }
+      }
+    }
+  ]
+}
