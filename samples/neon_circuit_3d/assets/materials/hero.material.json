@@ -1,0 +1,16 @@
+{
+  "name": "Neon Circuit_Hero",
+  "shader": "prism/pbr_spectral",
+  "baseColor": [
+    "#00D9FF",
+    "#FF3D9A",
+    "#FFFFFF"
+  ],
+  "metallic": 0.18,
+  "roughness": 0.42,
+  "emissive": "#FF3D9A",
+  "textures": {
+    "albedo": "../textures/hero_albedo.svg",
+    "emissive": "../textures/world_emissive.svg"
+  }
+}

@@ -1,0 +1,6 @@
+{"version":1,"name":"RPG","coordinates":"normalized","controls":[
+  {"name":"move","kind":"joystick","rect":[0.02,0.65,0.28,0.32],"axes":["horizontal","vertical"],"deadZone":0.12},
+  {"name":"attack","kind":"button","rect":[0.80,0.66,0.17,0.24],"button":"attack"},
+  {"name":"interact","kind":"button","rect":[0.67,0.79,0.11,0.17],"button":"interact"},
+  {"name":"menu","kind":"button","rect":[0.88,0.05,0.10,0.12],"button":"menu"}
+]}

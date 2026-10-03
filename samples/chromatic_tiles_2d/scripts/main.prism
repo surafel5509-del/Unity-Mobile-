@@ -1,0 +1,10 @@
+// Chromatic Tiles · PrismScript gameplay starter
+// Runs offline in PRISM's C++20 interpreter. Adapt the game rules and connect
+// action callbacks to the platform input adapter in your project.
+var moves = 24;
+var matches = 0;
+func start() { print("Chromatic Tiles ready"); }
+func update(dt) { if (moves < 0) { moves = 0; } }
+func resolve_match(count) { if (count >= 3) { matches += 1; moves -= 1; } }
+func reset_board() { moves = 24; matches = 0; }
+start();

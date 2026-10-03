@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "name": "Main",
+  "dimension": "2D",
+  "entities": [
+    {
+      "id": "skyrail_2d-01",
+      "name": "World",
+      "position": [
+        -1.88,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "components": {
+        "Transform": {
+          "enabled": true
+        },
+        "Metadata": {
+          "role": "game-object"
+        }
+      }
+    },
+    {
+      "id": "skyrail_2d-02",
+      "name": "Player",
+      "position": [
+        -0.62,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "components": {
+        "Transform": {
+          "enabled": true
+        },
+        "Metadata": {
+          "role": "game-object"
+        }
+      }
+    },
+    {
+      "id": "skyrail_2d-03",
+      "name": "Checkpoint_A",
+      "position": [
+        0.62,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "components": {
+        "Transform": {
+          "enabled": true
+        },
+        "Metadata": {
+          "role": "game-object"
+        }
+      }
+    },
+    {
+      "id": "skyrail_2d-04",
+      "name": "Checkpoint_B",
+      "position": [
+        1.88,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "components": {
+        "Transform": {
+          "enabled": true
+        },
+        "Metadata": {
+          "role": "game-object"
+        }
+      }
+    },
+    {
+      "id": "skyrail_2d-05",
+      "name": "Camera2D",
+      "position": [
+        -1.88,
+        0.0,
+        1.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "components": {
+        "Transform": {
+          "enabled": true
+        },
+        "Metadata": {
+          "role": "game-object"
+        }
+      }
+    },
+    {
+      "id": "skyrail_2d-06",
+      "name": "HUD",
+      "position": [
+        -0.62,
+        0.0,
+        1.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "components": {
+        "Transform": {
+          "enabled": true
+        },
+        "Metadata": {
+          "role": "game-object"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "canvas": {
+    "width": 1920,
+    "height": 1080,
+    "scale": "safe-area"
+  },
+  "theme": {
+    "background": "#0A0A12",
+    "primary": "#00D9FF",
+    "accent": "#FFC93C",
+    "font": "Inter"
+  },
+  "nodes": [
+    {
+      "type": "Label",
+      "name": "GameTitle",
+      "text": "Chromatic Tiles",
+      "anchor": "top-center"
+    },
+    {
+      "type": "ProgressBar",
+      "name": "Health",
+      "anchor": "top-left"
+    },
+    {
+      "type": "Button",
+      "name": "Pause",
+      "text": "\u2161",
+      "anchor": "top-right"
+    },
+    {
+      "type": "Label",
+      "name": "Score",
+      "text": "000000",
+      "anchor": "top-center-bottom"
+    }
+  ]
+}

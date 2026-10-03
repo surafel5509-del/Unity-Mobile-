@@ -1,0 +1,16 @@
+{
+  "name": "Skyrail Dash_Hero",
+  "shader": "prism/pbr_spectral",
+  "baseColor": [
+    "#7C3AED",
+    "#00D9FF",
+    "#FFFFFF"
+  ],
+  "metallic": 0.0,
+  "roughness": 0.42,
+  "emissive": "#00D9FF",
+  "textures": {
+    "albedo": "../textures/hero_albedo.svg",
+    "emissive": "../textures/world_emissive.svg"
+  }
+}

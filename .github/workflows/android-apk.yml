@@ -1,0 +1,70 @@
+name: Android APK
+on:
+  push:
+    branches: ["arena/01a0e656-unity-mobile"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  host-tests:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate offline starter-kit source assets
+        run: python3 tools/check_starter_kits.py
+      - name: C++20 host tests
+        run: ./build_tests.sh
+  android-apk:
+    needs: host-tests
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install Android SDK components on hosted runner
+        run: |
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          command -v sdkmanager || true
+          echo "Installed NDKs:"; ls "$ANDROID_HOME/ndk" || true
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0" "ndk;27.2.12479018" "cmake;3.22.1"
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Build installable debug APK
+        working-directory: android
+        run: |
+          if gradle --no-daemon :app:assembleDebug > "$RUNNER_TEMP/prism-gradle.log" 2>&1; then
+            tail -30 "$RUNNER_TEMP/prism-gradle.log"
+          else
+            tail -120 "$RUNNER_TEMP/prism-gradle.log"
+            # Hosted logs may be unavailable to external automation; emit actionable
+            # compiler/build errors as GitHub check annotations (viewable via API).
+            excerpt="$(tail -90 "$RUNNER_TEMP/prism-gradle.log")"
+            excerpt="${excerpt//'%'/'%25'}"
+            excerpt="${excerpt//$'\r'/'%0D'}"
+            excerpt="${excerpt//$'\n'/'%0A'}"
+            echo "::error::$excerpt"
+            exit 1
+          fi
+      - name: Check APK is nonempty and Android-only
+        run: |
+          test -s android/app/build/outputs/apk/debug/app-debug.apk
+          unzip -l android/app/build/outputs/apk/debug/app-debug.apk | grep 'lib/arm64-v8a/libprism_runtime.so'
+          unzip -l android/app/build/outputs/apk/debug/app-debug.apk | grep 'assets/sample.prism'
+          for kit in skyrail_2d ember_dungeon_2d chromatic_tiles_2d neon_circuit_3d orbit_foundry_3d wildlight_tactics_3d; do
+            unzip -l android/app/build/outputs/apk/debug/app-debug.apk | grep -q "$kit/project.prism.json"
+          done
+          du -h android/app/build/outputs/apk/debug/app-debug.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prism-engine-debug-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 30

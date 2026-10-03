@@ -1,0 +1,4 @@
+{"version":1,"name":"Platformer","coordinates":"normalized","controls":[
+  {"name":"move","kind":"dpad","rect":[0.02,0.70,0.32,0.26],"axes":["horizontal","vertical"],"deadZone":0.12},
+  {"name":"jump","kind":"button","rect":[0.80,0.71,0.16,0.22],"button":"jump"}
+]}

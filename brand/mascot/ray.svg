@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Ray, the light-beam sprite mascot">
+  <rect width="160" height="160" rx="34" fill="#0A0A12"/>
+  <path d="M25 89 94 42 109 87 35 108Z" fill="#FFFFFF"/>
+  <path d="M88 42 126 36 107 83Z" fill="#7C3AED"/>
+  <path d="M108 85 145 58" stroke="#FF3D9A" stroke-width="9" stroke-linecap="round"/>
+  <path d="M109 91 148 91" stroke="#FFC93C" stroke-width="9" stroke-linecap="round"/>
+  <path d="M108 97 145 125" stroke="#00D9FF" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="63" cy="76" r="5" fill="#0A0A12"/><circle cx="81" cy="70" r="5" fill="#0A0A12"/>
+  <path d="M65 92Q76 101 87 85" fill="none" stroke="#0A0A12" stroke-width="3" stroke-linecap="round"/>
+</svg>

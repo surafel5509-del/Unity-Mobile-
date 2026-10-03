@@ -1,0 +1,11 @@
+// Neon Circuit · PrismScript gameplay starter
+// Runs offline in PRISM's C++20 interpreter. Adapt the game rules and connect
+// action callbacks to the platform input adapter in your project.
+var speed = 0;
+var lap = 0;
+var best_time = 999;
+func start() { print("Neon Circuit ready"); }
+func update(dt) { if (dt > 0) { speed += 0; } }
+func pass_gate(gate_id) { if (gate_id == 0) { lap += 1; print("Lap:", lap); } }
+func reset_vehicle() { speed = 0; }
+start();

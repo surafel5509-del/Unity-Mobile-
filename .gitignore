@@ -1,0 +1,14 @@
+build-host/
+build/
+.gradle/
+.idea/
+*.iml
+local.properties
+android/.gradle/
+android/build/
+android/app/build/
+*.apk
+*.aab
+*.keystore
+*.jks
+*.log

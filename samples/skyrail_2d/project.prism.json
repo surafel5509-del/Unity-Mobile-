@@ -1,0 +1,19 @@
+{
+  "name": "Skyrail Dash",
+  "packageId": "dev.prismengine.starter.skyrail_2d",
+  "version": "1.0.0",
+  "template": "starter-kit",
+  "genre": "Precision platformer",
+  "dimension": "2D",
+  "entryScene": "scenes/main.scene.json",
+  "script": "scripts/main.prism",
+  "render": {
+    "api": "gles3-fallback",
+    "quality": "adaptive",
+    "targetFps": 60
+  },
+  "export": {
+    "only": "android-apk"
+  },
+  "offline": true
+}
